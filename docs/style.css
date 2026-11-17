@@ -800,141 +800,58 @@ h3 {
   font-size: 16vw;
   line-height: 1;
 }
-.platform-block {
-  position: relative;
+.package-list {
+  border-bottom: 1px solid var(--line);
 }
-.platform-block h3 {
-  font-family: var(--round);
-  font-weight: 600;
-  letter-spacing: -0.055em;
-  line-height: 1;
+.package-row {
+  border-top: 1px solid var(--line);
+  padding: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 125px;
 }
-.platform-block h3 > span {
-  display: block;
-  font: 12px var(--mono);
-  letter-spacing: 0;
-}
-.platform-block a {
+.package-row h3 {
+  font: 600 42px/1 var(--round);
+  width: 42%;
+  letter-spacing: -0.04em;
   display: flex;
   align-items: baseline;
+  gap: 26px;
+}
+.package-row h3 span {
+  font: 11px var(--mono);
+  letter-spacing: 0;
+}
+.package-row > div {
+  display: flex;
+  gap: 10px;
+}
+.package-row a {
+  display: flex;
+  gap: 30px;
   justify-content: space-between;
-  border-bottom: 1px solid currentColor;
-  padding: 8px 0 14px;
-  font-family: var(--mono);
-  line-height: 1.1;
+  align-items: center;
+  border: 1px solid #241b3077;
+  min-width: 125px;
+  padding: 15px 20px;
+  font: 14px var(--mono);
+  transition:
+    color 180ms,
+    background 180ms;
 }
-.platform-block a > span {
-  font-family: var(--sans);
-  font-size: 0.75em;
-  margin-left: 24px;
-  transition: transform 220ms ease-out;
+.package-row a span {
+  font-size: 22px;
 }
-.platform-block a:hover > span {
-  transform: translateY(6px);
-}
-.platform-block a:hover {
-  color: #644196;
-}
-.platform-mac {
-  min-height: 350px;
-  border-top: 1px solid var(--line);
-  padding-top: 48px;
-}
-.platform-mac h3 {
-  font-size: 11vw;
-}
-.platform-mac h3 > span {
-  margin: 20px 0 0 5px;
-}
-.mac-packages {
-  position: absolute;
-  left: 58%;
-  top: 40px;
-  width: 42%;
-}
-.mac-packages .package-primary {
-  font-size: 5vw;
-}
-.mac-packages .package-secondary {
-  font-size: 18px;
-  margin-top: 18px;
-  border: 0;
+.package-row a:hover {
+  color: var(--paper);
+  background: var(--ink);
 }
 .mac-warning {
+  margin: 0;
+  padding: 0 0 24px;
   font-size: 12px;
-  margin: 28px 0 40px;
   line-height: 1.85;
-  max-width: 550px;
-}
-.platform-windows {
-  margin-left: 21%;
-  min-height: 400px;
-  padding: 40px 3vw 45px;
-  background: var(--paper);
-  box-shadow: -18px 20px 0 #cbbfe0;
-}
-.platform-windows h3 {
-  font-size: 10.3vw;
-  margin-left: -6vw;
-}
-.platform-windows h3 > span {
-  position: absolute;
-  left: -6vw;
-  bottom: 55px;
-}
-.platform-windows > div {
-  display: flex;
-  gap: 45px;
-  align-items: flex-end;
-  margin-top: 42px;
-}
-.platform-windows .package-primary {
-  font-size: 3.6vw;
-  flex: 1;
-}
-.platform-windows .package-secondary {
-  font-size: 2.2vw;
-  min-width: 140px;
-}
-.platform-linux {
-  margin: 100px calc(-1 * var(--gutter)) 0;
-  min-height: 490px;
-  padding: 55px var(--gutter);
-  background: var(--ink);
-  color: var(--lavender);
-  overflow: hidden;
-}
-.platform-linux h3 {
-  position: absolute;
-  left: -1.4vw;
-  bottom: -25px;
-  font-size: 22vw;
-}
-.platform-linux h3 > span {
-  position: absolute;
-  left: 5.567vw;
-  top: -28px;
-}
-.platform-linux > div {
-  position: relative;
-  width: 37%;
-  margin-left: auto;
-  z-index: 2;
-}
-.platform-linux .package-primary {
-  font-size: 3.2vw;
-}
-.linux-formats {
-  display: flex;
-  gap: 35px;
-  margin-top: 28px;
-}
-.linux-formats a {
-  font-size: 2.3vw;
-  flex: 1;
-}
-.platform-linux a:hover {
-  color: #fff;
 }
 .download-notes {
   display: flex;
