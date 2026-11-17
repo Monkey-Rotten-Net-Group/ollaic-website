@@ -1,0 +1,67 @@
+[
+  {
+    "file": "assets/app-agent.png",
+    "bytes": 244120,
+    "sha256": "d3203b1d2d170698b77646b72c87cc4cd46d45ee8abb9efffba932e5b81aa29c"
+  },
+  {
+    "file": "assets/app-memory.png",
+    "bytes": 42673,
+    "sha256": "8ffaf1a1835fd05958161c4c92a6362b7d1eb297bdff565e8b4c5a65ddb718b6"
+  },
+  {
+    "file": "assets/editor-study.png",
+    "bytes": 194254,
+    "sha256": "6057041e751ace292bbd6c9143355a73f0bbf4609ecefb1c9ba1adc9f4e85a29"
+  },
+  {
+    "file": "assets/fonts/fredoka-600.ttf",
+    "bytes": 48768,
+    "sha256": "594cd6463e8eccef94423fba8e0114c137492f6415af4b414b21b73abcb644a8"
+  },
+  {
+    "file": "assets/fonts/fredoka-OFL.txt",
+    "bytes": 4388,
+    "sha256": "5c9e7eee5c6b25f4b05b8d53b2e470ea4962f9ced742d044a98f7d95d1375bab"
+  },
+  {
+    "file": "assets/fonts/geist-400.ttf",
+    "bytes": 71160,
+    "sha256": "7022da390e9b401ea35b722f8ed2376948e70add10954bc798839b4bfe17ef3f"
+  },
+  {
+    "file": "assets/fonts/geistmono-OFL.txt",
+    "bytes": 4387,
+    "sha256": "1781d2806a07d91c4edf4740b88449fab7d0eadad53f7c351b94cd4d4eb8c00f"
+  },
+  {
+    "file": "assets/fonts/noto-400.ttf",
+    "bytes": 58768,
+    "sha256": "dad5d98137ec141285adeb11a14194e846c2e1ec43116bd432a80f188225c4e5"
+  },
+  {
+    "file": "assets/fonts/noto-700.ttf",
+    "bytes": 58756,
+    "sha256": "04b855ea0cf1ff073a4fa56ba6fd74471f3236af40cc7743e01b21dfdb3a9da4"
+  },
+  {
+    "file": "assets/fonts/notosanssc-OFL.txt",
+    "bytes": 4388,
+    "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+  },
+  {
+    "file": "assets/production-flow.png",
+    "bytes": 113268,
+    "sha256": "0c38640d65b8624b33a700cc1f308f66f59e3320ca2b6ee7abcc9256af4a60bc"
+  },
+  {
+    "file": "assets/scene-plate.png",
+    "bytes": 237254,
+    "sha256": "0e6c4ff94ad2cf48103a4dc9919426c13009528a1cb603ac3deb27a06ec27d1e"
+  },
+  {
+    "file": "assets/stage-study.png",
+    "bytes": 526690,
+    "sha256": "62767b884502227429dd245ae980a26c0ff3373a1a58361d9eeef413529cb225"
+  }
+]
