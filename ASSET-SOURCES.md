@@ -1,20 +1,16 @@
 # Asset provenance
 
-## Real product captures
+## Current local-source captures
 
-Captured directly from the official macOS Apple Silicon v0.2.0 application on 2026-11-17. These are unmodified application-window screenshots, not mockups. The interface contains its own “Ollaic 2.0” wording; the release version is v0.2.0.
+Captured on 2026-11-17 from the running current local product source at `/Users/misaki/Projects/Ollaic_GaLaGame-Maker`, commit `6f55e4ac846ac0a670d315b66443487c27be8d54`, clean working tree before and after capture. No release binary was used for these screenshots.
 
-Release: https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/tag/v0.2.0
+Startup: `pnpm tauri:dev` compiled the current Rust application. After the capture tool confused the shared release bundle identifier, the compiled `target/debug/ollaic` was relaunched through an ignored local `.app` wrapper with a distinct identifier. Its executable is a symlink to that same locally compiled binary. `pnpm --dir apps/desktop exec vite` served the current frontend at `http://127.0.0.1:1420/`, verified in the native window accessibility tree. No product source or configuration was edited.
 
-Binary: https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_aarch64.app.tar.gz
+- `docs/assets/ollaic-local-editor.png`: current script editor and idle assistant with original demonstration dialogue.
+- `docs/assets/ollaic-local-workflow.png`: current Stage 1 configuration, not executed; existing environment validation is visible, not a claim of successful generation.
+- `docs/assets/ollaic-local-scene-graph.png`: current scene graph with the demo project's single scene.
 
-Verified archive SHA-256: `a79bb754f6f8035a1b40f25b9e22d9bdbdf7dfbe363aab192aea68aedd53a991`.
-
-- `docs/assets/ollaic-v0.2.0-workbench.png`: empty project workbench.
-- `docs/assets/ollaic-v0.2.0-workflow.png`: actual workflow configuration panel, before execution. This does not claim a successful AI run.
-- `docs/assets/ollaic-v0.2.0-editor.png`: actual command editor with a locally created demonstration project. The two short English dialogue lines were written for this capture; no third-party story, artwork or private project is used.
-
-The demonstration project and downloaded binary remain in ignored `_local/`; the product source repository was not changed. No AI requests were initiated, no settings/credentials were displayed, and no third-party game assets were imported. No recording was made; deliverables are still screenshots.
+All three prior release-package screenshots were removed from the current tree and page references. Git history retains previous commits. No recording was made. The demo project is stored outside the product repository under the website's ignored `_local/`. No private project content or third-party game artwork is included. No AI request was initiated or credential settings opened.
 
 ## Existing product icon
 
