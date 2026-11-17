@@ -41,7 +41,7 @@
           <figure class="hero-plane">
             <div class="plane-edge" aria-hidden="true"></div>
             <div class="plane-caption">
-              <span>编辑 / 场景 / 预览</span><span>开发期界面原型 · 非 v0.2.0 实机</span>
+              <span>开发期界面原型 · 非 v0.2.0 实机</span>
             </div>
             <div class="hero-media">
               <img
@@ -56,13 +56,10 @@
         </div>
       </section>
 
-      <div class="journey scroll-scene" id="journey">
-        <div class="journey-viewport pinned">
-          <section class="structure" id="structure" aria-labelledby="structure-title">
+      <div class="story scroll-scene" id="journey">
+        <div class="story-stage pinned">
+          <section class="structure story-layer" id="structure" aria-labelledby="structure-title">
             <div class="structure-stage">
-              <div class="section-line">
-                <span>01 — 叙事结构</span><span>构想 → 节点 → 分支</span>
-              </div>
               <div class="structure-copy">
                 <h2 id="structure-title">故事，<br />有结构。</h2>
                 <p>用节点组织叙事。<br />把不同走向，编排成可追踪的分支。</p>
@@ -86,17 +83,12 @@
                   />
                 </svg>
                 <div class="map-origin"><span>起点</span><b>一段对白</b></div>
-                <div class="map-choice choice-a">
-                  <span>分支 A</span><b>继续对话</b><i aria-hidden="true">↗</i>
-                </div>
-                <div class="map-choice choice-b">
-                  <span>分支 B</span><b>切换场景</b><i aria-hidden="true">↗</i>
-                </div>
+                <div class="map-choice choice-a"><b>继续对话</b><i aria-hidden="true">↗</i></div>
+                <div class="map-choice choice-b"><b>切换场景</b><i aria-hidden="true">↗</i></div>
                 <div class="map-end"><span>后续场景</span><span aria-hidden="true">→</span></div>
               </div>
               <div class="structure-bottom">
-                <span>叙事结构示意，非软件操作界面</span
-                ><span>沿着分支，进入场景 <b aria-hidden="true">↘</b></span>
+                <span>叙事结构示意，非软件操作界面</span>
               </div>
               <div class="scene-seed" aria-hidden="true">
                 <img src="assets/scene-plate.png" alt="" />
@@ -104,7 +96,7 @@
             </div>
           </section>
 
-          <section class="scene" id="scenes" aria-labelledby="scene-title">
+          <section class="scene story-layer" id="scenes" aria-labelledby="scene-title">
             <div class="scene-stage">
               <img
                 class="scene-environment"
@@ -114,9 +106,6 @@
                 alt="内部原型中的站台场景插画：黄昏、列车站台与两个人物。"
               />
               <div class="scene-shade" aria-hidden="true"></div>
-              <div class="section-line">
-                <span>02 — 场景与素材</span><span>从叙事结构，到画面</span>
-              </div>
               <h2 id="scene-title">让场景<br />进入叙事。</h2>
               <div class="scene-description">
                 <p>角色、背景、对白。<br />在场景里组织它们，<br />在预览里查看演出。</p>
@@ -137,133 +126,135 @@
               <div class="scene-word" aria-hidden="true">场景</div>
             </div>
           </section>
+          <section
+            class="production story-layer"
+            id="production"
+            aria-labelledby="production-title"
+          >
+            <div class="production-stage">
+              <div class="production-type" aria-hidden="true">AI</div>
+              <div class="production-copy">
+                <h2 id="production-title">从构想到草稿，<br />分步推进。</h2>
+              </div>
+              <figure class="flow-plane">
+                <figcaption>AI 生产流</figcaption>
+                <div class="flow-crop">
+                  <img
+                    src="assets/production-flow.png"
+                    width="1440"
+                    height="900"
+                    alt="生产流开发期演示：故事规划、世界观设定、章节大纲、角色设计，以及对白创作和场景编排。"
+                  />
+                </div>
+              </figure>
+              <figure class="memory-plane">
+                <figcaption>项目记忆</figcaption>
+                <div>
+                  <img
+                    src="assets/app-memory.png"
+                    width="394"
+                    height="780"
+                    alt="开发期项目记忆与编辑 Agent 侧栏。"
+                  />
+                </div>
+              </figure>
+              <div class="production-description">
+                <p>让 Agent 参与制作，结合项目记忆推进流程。<br />检查草稿，再继续编辑。</p>
+                <span>生产流与记忆画面均为开发期演示，非 v0.2.0 实机</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="playback story-layer" id="playback" aria-labelledby="playback-title">
+            <div class="playback-stage">
+              <div class="playback-copy">
+                <p>边编辑，边预览。</p>
+                <span>查看当前草稿的演出效果，再回到编辑中调整。</span>
+              </div>
+              <figure class="playback-plane">
+                <div class="preview-crop">
+                  <img
+                    src="assets/app-agent.png"
+                    width="1440"
+                    height="900"
+                    alt="Ollaic 开发期大预览界面，显示 WebGAL 预览与编辑 Agent 侧栏。"
+                  />
+                </div>
+                <figcaption>实时预览 · 开发期演示，非 v0.2.0 实机</figcaption>
+              </figure>
+              <h2 class="playback-heading" id="playback-title"><span>预</span><span>览</span></h2>
+              <svg class="export-path" viewBox="0 0 1440 900" fill="none" aria-hidden="true">
+                <path pathLength="1" d="M315 540H510Q570 540 570 480V410Q570 350 630 350H810" />
+              </svg>
+              <div class="export-copy">
+                <h3>导出，<br />成为可运行的项目。</h3>
+                <p>继续使用 WebGAL 运行作品。<br />Ollaic 是编辑器，WebGAL 是运行引擎。</p>
+              </div>
+              <div class="export-type" aria-label="WebGAL 项目">WebGAL<span>可运行项目</span></div>
+            </div>
+          </section>
+          <div class="release-curtain" aria-hidden="true"><span>下载桌面版</span><b>v0.2.0</b></div>
         </div>
       </div>
-
-      <section class="production scroll-scene" id="production" aria-labelledby="production-title">
-        <div class="production-stage pinned">
-          <div class="section-line">
-            <span>03 — AI 生产流</span><span>多步骤 Agent / 项目记忆</span>
-          </div>
-          <div class="production-type" aria-hidden="true">AI</div>
-          <div class="production-copy">
-            <h2 id="production-title">从构想到草稿，<br />分步推进。</h2>
-            <p>让 Agent 参与制作，结合项目记忆推进流程。<br />检查草稿，再继续编辑。</p>
-            <span class="production-source">生产流与记忆画面均为开发期演示，非 v0.2.0 实机</span>
-          </div>
-          <figure class="flow-plane">
-            <div class="plane-caption">
-              <span>生产流 · 步骤与进度</span><span>开发期演示 · 非 v0.2.0 实机</span>
-            </div>
-            <div class="flow-crop">
-              <img
-                src="assets/production-flow.png"
-                width="1440"
-                height="900"
-                alt="生产流开发期演示：故事规划、世界观设定、章节大纲、角色设计，以及对白创作和场景编排。"
-              />
-            </div>
-          </figure>
-          <figure class="memory-plane">
-            <figcaption>项目记忆</figcaption>
-            <div>
-              <img
-                src="assets/app-memory.png"
-                width="394"
-                height="780"
-                alt="开发期项目记忆与编辑 Agent 侧栏。"
-              />
-            </div>
-          </figure>
-          <ol class="production-route" aria-label="制作流程概览">
-            <li>构想</li>
-            <li>生成草稿</li>
-            <li>人工复核</li>
-            <li>继续编辑</li>
-          </ol>
-        </div>
-      </section>
-
-      <section class="playback scroll-scene" id="playback" aria-labelledby="playback-title">
-        <div class="playback-stage pinned">
-          <div class="section-line">
-            <span>04 — 预览与导出</span><span>编辑器 → 可运行的 WebGAL 项目</span>
-          </div>
-          <div class="playback-copy">
-            <h2 id="playback-title">边编辑，<br />边预览。</h2>
-            <p>查看当前草稿的演出效果，<br />再回到编辑中调整。</p>
-          </div>
-          <figure class="playback-plane">
-            <div class="plane-caption">
-              <span>实时预览</span><span>开发期演示 · 非 v0.2.0 实机</span>
-            </div>
-            <img
-              src="assets/app-agent.png"
-              width="1440"
-              height="900"
-              alt="Ollaic 开发期大预览界面，显示 WebGAL 预览与编辑 Agent 侧栏。"
-            />
-          </figure>
-          <svg class="export-path" viewBox="0 0 1440 900" fill="none" aria-hidden="true">
-            <path pathLength="1" d="M315 540H510Q570 540 570 480V410Q570 350 630 350H810" />
-          </svg>
-          <div class="export-copy">
-            <h3>导出，<br />成为可运行的项目。</h3>
-            <p>继续使用 WebGAL 运行作品。<br />Ollaic 是编辑器，WebGAL 是运行引擎。</p>
-          </div>
-          <div class="export-type" aria-label="WebGAL 项目">WebGAL<span>可运行项目</span></div>
-          <div class="playback-foot">从编辑到运行，保留创作的连续性。</div>
-        </div>
-      </section>
-
       <section class="download" id="download" aria-labelledby="download-title">
-        <div class="section-line">
-          <span>下载桌面版</span
-          ><a
-            href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/tag/v0.2.0"
-            >v0.2.0 · 查看发布说明 ↗</a
-          >
-        </div>
         <div class="download-heading">
           <h2 id="download-title">开始<br />制作。</h2>
-          <p>放开给大家玩的<br />早期桌面编辑器。</p>
+          <div>
+            <p>放开给大家玩的<br />早期桌面编辑器。</p>
+            <a
+              class="release-link"
+              href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/tag/v0.2.0"
+              >v0.2.0 · 查看发布说明 ↗</a
+            >
+          </div>
           <span class="download-arrow" aria-hidden="true">↙</span>
         </div>
-        <div class="package-list">
-          <div class="package-row">
-            <h3>macOS<span>Apple Silicon</span></h3>
-            <div>
-              <a
-                href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_aarch64.dmg"
-                >DMG <span aria-hidden="true">↓</span></a
-              ><a
-                href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_aarch64.app.tar.gz"
-                >app.tar.gz <span aria-hidden="true">↓</span></a
-              >
-            </div>
+        <div class="platform-mac platform-block" id="mac">
+          <h3>macOS<span>Apple Silicon</span></h3>
+          <div class="mac-packages">
+            <a
+              class="package-primary"
+              href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_aarch64.dmg"
+              >DMG <span aria-hidden="true">↓</span></a
+            ><a
+              class="package-secondary"
+              href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_aarch64.app.tar.gz"
+              >app.tar.gz <span aria-hidden="true">↓</span></a
+            >
           </div>
-          <div class="package-row">
-            <h3>Windows<span>x64</span></h3>
-            <div>
-              <a
-                href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_x64-setup.exe"
-                >Setup.exe <span aria-hidden="true">↓</span></a
-              ><a
-                href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_x64_en-US.msi"
-                >MSI <span aria-hidden="true">↓</span></a
-              >
-            </div>
+          <p class="mac-warning">
+            macOS 安装包未签名，可能被 Gatekeeper 或隔离属性拦截。<br />安装前请查看对应版本的发布说明。
+          </p>
+        </div>
+        <div class="platform-windows platform-block" id="windows">
+          <h3>Windows<span>x64</span></h3>
+          <div>
+            <a
+              class="package-primary"
+              href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_x64-setup.exe"
+              >Setup.exe <span aria-hidden="true">↓</span></a
+            ><a
+              class="package-secondary"
+              href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_x64_en-US.msi"
+              >MSI <span aria-hidden="true">↓</span></a
+            >
           </div>
-          <div class="package-row">
-            <h3>Linux<span>x86_64</span></h3>
-            <div>
+        </div>
+        <div class="platform-linux platform-block" id="linux">
+          <h3>Linux<span>x86_64</span></h3>
+          <div>
+            <a
+              class="package-primary"
+              href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_amd64.AppImage"
+              >AppImage <span aria-hidden="true">↓</span></a
+            >
+            <div class="linux-formats">
               <a
-                href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_amd64.AppImage"
-                >AppImage <span aria-hidden="true">↓</span></a
-              ><a
+                class="package-secondary"
                 href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_amd64.deb"
                 >deb <span aria-hidden="true">↓</span></a
               ><a
+                class="package-secondary"
                 href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic-0.2.0-1.x86_64.rpm"
                 >rpm <span aria-hidden="true">↓</span></a
               >
@@ -271,10 +262,10 @@
           </div>
         </div>
         <div class="download-notes">
-          <p>
-            macOS 安装包未签名，可能被 Gatekeeper 或隔离属性拦截。<br />安装前请查看对应版本的发布说明。
-          </p>
           <p>仓库包含 Android 与 iOS 客户端；<br />本页不提供移动端正式发布包或应用商店入口。</p>
+          <a href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases"
+            >发布记录 ↗</a
+          >
         </div>
       </section>
     </main>

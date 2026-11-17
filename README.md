@@ -10,8 +10,6 @@ Static HTML, CSS, and vanilla JavaScript without runtime frameworks or build dep
 - `docs/index.html`: Interactive desktop prototype baseline (~1440 × 900)
 - `docs/style.css`: Typography, layout, and reduced-motion styling
 - `docs/motion.js`: Runtime-measured native scroll progression and spatial choreography
-- `docs/review.html`: 16-frame desktop review sheet with direct chapter-progress links
-- `docs/frames/`: Desktop keyframe captures and static flow reference
 - `docs/assets/`: Disclosed prototype interface captures and locally bundled web fonts
 
 Local preview:
