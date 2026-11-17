@@ -1,23 +1,32 @@
 # Asset provenance
 
-## Current local-source captures
+This document records the provenance, licensing, and usage terms of runtime assets and bundled web fonts included in the Ollaic desktop website prototype under `docs/`.
 
-Captured on 2026-11-17 from the running current local product source at `/Users/misaki/Projects/Ollaic_GaLaGame-Maker`, commit `6f55e4ac846ac0a670d315b66443487c27be8d54`, clean working tree before and after capture. No release binary was used for these screenshots.
+## Prototype artwork and interface references
 
-Startup: `pnpm tauri:dev` compiled the current Rust application. After the capture tool confused the shared release bundle identifier, the compiled `target/debug/ollaic` was relaunched through an ignored local `.app` wrapper with a distinct identifier. Its executable is a symlink to that same locally compiled binary. `pnpm --dir apps/desktop exec vite` served the current frontend at `http://127.0.0.1:1420/`, verified in the native window accessibility tree. No product source or configuration was edited.
+All product artwork and interface captures are drawn from internal prototype and design exploration sources authorized for noncommercial showcase use by the project owner. No installed v0.2.0 screen capture is claimed; visible prototype disclosures are retained across the site.
 
-- `docs/assets/ollaic-local-editor.png`: current script editor and idle assistant with original demonstration dialogue.
-- `docs/assets/ollaic-local-workflow.png`: current Stage 1 configuration, not executed; existing environment validation is visible, not a claim of successful generation.
-- `docs/assets/ollaic-local-scene-graph.png`: current scene graph with the demo project's single scene.
+| Runtime file | Treatment / use |
+| --- | --- |
+| `docs/assets/stage-study.png` | Opening workbench plane. Full screenshot of internal design exploration (upper 2316 × 1160 region visible in CSS). |
+| `docs/assets/editor-study.png` | Scene inspector plane. Crop from right sidebar of internal design prototype. |
+| `docs/assets/scene-plate.png` | Station scene illustration embedded in internal prototype. Used for branch endpoint and continuous narrative environment. |
+| `docs/assets/production-flow.png` | Multi-step AI production workflow interface demonstration. |
+| `docs/assets/app-agent.png` | Live preview reference and WebGAL preview screen demonstration. |
+| `docs/assets/app-memory.png` | Project memory and assistant sidebar demonstration. |
+| `docs/assets/ollaic-icon.png` | Official Ollaic application icon from `apps/desktop/src-tauri/icons/icon.png`. |
 
-All three prior release-package screenshots were removed from the current tree and page references. Git history retains previous commits. No recording was made. The demo project is stored outside the product repository under the website's ignored `_local/`. No private project content or third-party game artwork is included. No AI request was initiated or credential settings opened.
+## Fonts
 
-## Existing product icon
+All web fonts are bundled locally under `docs/assets/fonts/`. No external Google Fonts network requests are made at runtime. Font binaries were sourced from the official Google Fonts endpoints and are distributed under the SIL Open Font License 1.1. Upstream license texts are retained in the directory.
 
-`docs/assets/ollaic-icon.png` is copied from `apps/desktop/src-tauri/icons/icon.png` at product commit `6f55e4ac846ac0a670d315b66443487c27be8d54`.
+| Family | Delivered file | License |
+| --- | --- | --- |
+| Fredoka 600 | `docs/assets/fonts/fredoka-600.ttf` | SIL OFL 1.1 (`docs/assets/fonts/fredoka-OFL.txt`) |
+| Noto Sans SC 400 | `docs/assets/fonts/noto-400.ttf` | SIL OFL 1.1 (`docs/assets/fonts/notosanssc-OFL.txt`) |
+| Noto Sans SC 700 | `docs/assets/fonts/noto-700.ttf` | SIL OFL 1.1 (`docs/assets/fonts/notosanssc-OFL.txt`) |
+| Geist Mono 400 | `docs/assets/fonts/geist-400.ttf` | SIL OFL 1.1 (`docs/assets/fonts/geistmono-OFL.txt`) |
 
-Source: https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/blob/6f55e4ac846ac0a670d315b66443487c27be8d54/apps/desktop/src-tauri/icons/icon.png
+## Terms of use
 
-## Intended use
-
-The product owner explicitly authorized public, noncommercial product presentation in the OL-005 follow-up (“我不商用，我纯放开给大家玩的”). These captures are collected for that authorized website use. This is not a commercial-use assertion or a general license grant. No license text is invented for the product or these assets.
+The product owner authorized public, noncommercial presentation of this desktop design prototype. This does not grant a public software license or commercial copyright waiver for third-party assets.

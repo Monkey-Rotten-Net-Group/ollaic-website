@@ -1,0 +1,91 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "horizontalOverflow": false,
+  "images": [
+    {
+      "src": "assets/stage-study.png",
+      "decoded": true
+    },
+    {
+      "src": "assets/scene-plate.png",
+      "decoded": true
+    },
+    {
+      "src": "assets/scene-plate.png",
+      "decoded": true
+    },
+    {
+      "src": "assets/editor-study.png",
+      "decoded": true
+    },
+    {
+      "src": "assets/production-flow.png",
+      "decoded": true
+    },
+    {
+      "src": "assets/app-memory.png",
+      "decoded": true
+    },
+    {
+      "src": "assets/app-agent.png",
+      "decoded": true
+    }
+  ],
+  "fonts": [
+    {
+      "family": "Fredoka",
+      "weight": "600",
+      "status": "loaded"
+    },
+    {
+      "family": "Noto Sans SC",
+      "weight": "400",
+      "status": "loaded"
+    },
+    {
+      "family": "Noto Sans SC",
+      "weight": "700",
+      "status": "loaded"
+    },
+    {
+      "family": "Geist Mono",
+      "weight": "400",
+      "status": "loaded"
+    }
+  ],
+  "packages": [
+    "https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_aarch64.dmg",
+    "https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_aarch64.app.tar.gz",
+    "https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_x64-setup.exe",
+    "https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_x64_en-US.msi",
+    "https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_amd64.AppImage",
+    "https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_amd64.deb",
+    "https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic-0.2.0-1.x86_64.rpm"
+  ],
+  "errors": [],
+  "remoteResources": [],
+  "keyboard": {
+    "firstFocus": "skip",
+    "outline": "solid",
+    "skip": {
+      "hash": "#download",
+      "y": 8073,
+      "targetTop": 72
+    }
+  },
+  "reducedMotion": {
+    "media": true,
+    "motionClass": false,
+    "stagePosition": "relative",
+    "sceneOpacity": "1",
+    "exportOpacity": "1",
+    "activeMotionStyles": 0,
+    "animations": 0,
+    "images": 7,
+    "height": 6841,
+    "horizontalOverflow": false
+  }
+}

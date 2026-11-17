@@ -1,29 +1,292 @@
 <!doctype html>
 <html lang="zh-CN">
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ollaic — 官网部署验证</title>
-  <link rel="stylesheet" href="style.css" />
-  <main>
-    <h1>Ollaic</h1>
-    <p>基于 WebGAL 的视觉小说桌面编辑器。</p>
-    <p>官网筹备中。本页仅用于验证部署通路，正式展示内容等待设计交接。</p>
-    <a href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker">查看产品仓库</a>
-    <section aria-labelledby="captures">
-      <h2 id="captures">真实产品截图</h2>
-      <p>以下为本机当前源码运行实拍，使用独立演示项目。官网仍在等待设计交接。</p>
-      <figure>
-        <img src="assets/ollaic-local-scene-graph.png" alt="Ollaic 当前源码版本的场景关系图" width="2498" height="1800" />
-        <figcaption>场景关系图 · 单场景演示</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/ollaic-local-editor.png" alt="Ollaic 指令编辑器中的演示对白" width="2498" height="1800" loading="lazy" />
-        <figcaption>指令编辑器 · 演示文本</figcaption>
-      </figure>
-      <figure>
-        <img src="assets/ollaic-local-workflow.png" alt="Ollaic Workflow Agent 的流程配置界面，尚未执行" width="2498" height="1800" loading="lazy" />
-        <figcaption>AI 流程配置 · 尚未执行</figcaption>
-      </figure>
-    </section>
-  </main>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#dfd5ee" />
+    <meta
+      name="description"
+      content="Ollaic，面向 WebGAL 的桌面可视小说编辑器。编排叙事、组织场景、实时预览，导出可运行的 WebGAL 项目。"
+    />
+    <title>Ollaic · 可视小说，从编辑到运行</title>
+    <link rel="preload" as="font" href="assets/fonts/fredoka-600.ttf" type="font/ttf" crossorigin />
+    <link rel="stylesheet" href="style.css" />
+    <script src="motion.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#download">跳到下载</a>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Ollaic 首页">Ollaic</a>
+      <nav aria-label="主导航">
+        <a href="#journey">编辑体验</a>
+        <a href="#production">AI 生产流</a>
+        <a class="nav-download" href="#download">下载 v0.2.0 <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+    <main id="top">
+      <section class="hero scroll-scene" id="hero" aria-labelledby="hero-title">
+        <div class="hero-stage pinned">
+          <div class="hero-grid" aria-hidden="true"></div>
+          <div class="hero-kicker">面向 WebGAL 的桌面可视小说编辑器</div>
+          <p class="hero-material-note">画面为开发期界面原型<br />非 v0.2.0 实机</p>
+          <div class="hero-wordmark" aria-hidden="true">Ollaic</div>
+          <div class="hero-copy">
+            <h1 id="hero-title">编排叙事。<br />看见场景。</h1>
+            <p>从对白与分支，到预览与导出。<br />在桌面上制作可视小说。</p>
+            <a class="primary-link" href="#download"
+              >下载桌面版 v0.2.0 <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <div class="hero-overview" aria-hidden="true">创作的不同侧面，<br />在同一个工作台。</div>
+          <figure class="hero-plane">
+            <div class="plane-edge" aria-hidden="true"></div>
+            <div class="plane-caption">
+              <span>编辑 / 场景 / 预览</span><span>开发期界面原型 · 非 v0.2.0 实机</span>
+            </div>
+            <div class="hero-media">
+              <img
+                src="assets/stage-study.png"
+                width="2316"
+                height="1299"
+                alt="Ollaic 内部场景工作台原型：场景画面、对白编排与场景分镜。"
+                fetchpriority="high"
+              />
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <div class="journey scroll-scene" id="journey">
+        <div class="journey-viewport pinned">
+          <section class="structure" id="structure" aria-labelledby="structure-title">
+            <div class="structure-stage">
+              <div class="section-line">
+                <span>01 — 叙事结构</span><span>构想 → 节点 → 分支</span>
+              </div>
+              <div class="structure-copy">
+                <h2 id="structure-title">故事，<br />有结构。</h2>
+                <p>用节点组织叙事。<br />把不同走向，编排成可追踪的分支。</p>
+              </div>
+              <div class="story-map" aria-label="叙事结构示意：起点分为两条路径，再汇入后续场景。">
+                <svg
+                  class="branch-paths"
+                  viewBox="0 0 1440 900"
+                  fill="none"
+                  aria-hidden="true"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    class="path-base"
+                    d="M480 470H625Q665 470 665 430V295Q665 255 705 255H790M665 430V625Q665 665 705 665H790M970 255H1045Q1085 255 1085 295V430Q1085 470 1125 470H1210M970 665H1045Q1085 665 1085 625V510Q1085 470 1125 470"
+                  />
+                  <path
+                    class="path-chosen"
+                    pathLength="1"
+                    d="M480 470H625Q665 470 665 430V295Q665 255 705 255H970H1045Q1085 255 1085 295V430Q1085 470 1125 470H1210"
+                  />
+                </svg>
+                <div class="map-origin"><span>起点</span><b>一段对白</b></div>
+                <div class="map-choice choice-a">
+                  <span>分支 A</span><b>继续对话</b><i aria-hidden="true">↗</i>
+                </div>
+                <div class="map-choice choice-b">
+                  <span>分支 B</span><b>切换场景</b><i aria-hidden="true">↗</i>
+                </div>
+                <div class="map-end"><span>后续场景</span><span aria-hidden="true">→</span></div>
+              </div>
+              <div class="structure-bottom">
+                <span>叙事结构示意，非软件操作界面</span
+                ><span>沿着分支，进入场景 <b aria-hidden="true">↘</b></span>
+              </div>
+              <div class="scene-seed" aria-hidden="true">
+                <img src="assets/scene-plate.png" alt="" />
+              </div>
+            </div>
+          </section>
+
+          <section class="scene" id="scenes" aria-labelledby="scene-title">
+            <div class="scene-stage">
+              <img
+                class="scene-environment"
+                src="assets/scene-plate.png"
+                width="1650"
+                height="650"
+                alt="内部原型中的站台场景插画：黄昏、列车站台与两个人物。"
+              />
+              <div class="scene-shade" aria-hidden="true"></div>
+              <div class="section-line">
+                <span>02 — 场景与素材</span><span>从叙事结构，到画面</span>
+              </div>
+              <h2 id="scene-title">让场景<br />进入叙事。</h2>
+              <div class="scene-description">
+                <p>角色、背景、对白。<br />在场景里组织它们，<br />在预览里查看演出。</p>
+                <span>画面来自内部界面原型，非 v0.2.0 实机</span>
+              </div>
+              <figure class="inspector-plane">
+                <figcaption>同一场景的编辑侧面</figcaption>
+                <div class="inspector-crop">
+                  <img
+                    src="assets/editor-study.png"
+                    width="1440"
+                    height="1000"
+                    alt="内部原型的对白属性、当前背景及配音设置。"
+                  />
+                </div>
+                <span class="small-source">开发期界面原型</span>
+              </figure>
+              <div class="scene-word" aria-hidden="true">场景</div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <section class="production scroll-scene" id="production" aria-labelledby="production-title">
+        <div class="production-stage pinned">
+          <div class="section-line">
+            <span>03 — AI 生产流</span><span>多步骤 Agent / 项目记忆</span>
+          </div>
+          <div class="production-type" aria-hidden="true">AI</div>
+          <div class="production-copy">
+            <h2 id="production-title">从构想到草稿，<br />分步推进。</h2>
+            <p>让 Agent 参与制作，结合项目记忆推进流程。<br />检查草稿，再继续编辑。</p>
+            <span class="production-source">生产流与记忆画面均为开发期演示，非 v0.2.0 实机</span>
+          </div>
+          <figure class="flow-plane">
+            <div class="plane-caption">
+              <span>生产流 · 步骤与进度</span><span>开发期演示 · 非 v0.2.0 实机</span>
+            </div>
+            <div class="flow-crop">
+              <img
+                src="assets/production-flow.png"
+                width="1440"
+                height="900"
+                alt="生产流开发期演示：故事规划、世界观设定、章节大纲、角色设计，以及对白创作和场景编排。"
+              />
+            </div>
+          </figure>
+          <figure class="memory-plane">
+            <figcaption>项目记忆</figcaption>
+            <div>
+              <img
+                src="assets/app-memory.png"
+                width="394"
+                height="780"
+                alt="开发期项目记忆与编辑 Agent 侧栏。"
+              />
+            </div>
+          </figure>
+          <ol class="production-route" aria-label="制作流程概览">
+            <li>构想</li>
+            <li>生成草稿</li>
+            <li>人工复核</li>
+            <li>继续编辑</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="playback scroll-scene" id="playback" aria-labelledby="playback-title">
+        <div class="playback-stage pinned">
+          <div class="section-line">
+            <span>04 — 预览与导出</span><span>编辑器 → 可运行的 WebGAL 项目</span>
+          </div>
+          <div class="playback-copy">
+            <h2 id="playback-title">边编辑，<br />边预览。</h2>
+            <p>查看当前草稿的演出效果，<br />再回到编辑中调整。</p>
+          </div>
+          <figure class="playback-plane">
+            <div class="plane-caption">
+              <span>实时预览</span><span>开发期演示 · 非 v0.2.0 实机</span>
+            </div>
+            <img
+              src="assets/app-agent.png"
+              width="1440"
+              height="900"
+              alt="Ollaic 开发期大预览界面，显示 WebGAL 预览与编辑 Agent 侧栏。"
+            />
+          </figure>
+          <svg class="export-path" viewBox="0 0 1440 900" fill="none" aria-hidden="true">
+            <path pathLength="1" d="M315 540H510Q570 540 570 480V410Q570 350 630 350H810" />
+          </svg>
+          <div class="export-copy">
+            <h3>导出，<br />成为可运行的项目。</h3>
+            <p>继续使用 WebGAL 运行作品。<br />Ollaic 是编辑器，WebGAL 是运行引擎。</p>
+          </div>
+          <div class="export-type" aria-label="WebGAL 项目">WebGAL<span>可运行项目</span></div>
+          <div class="playback-foot">从编辑到运行，保留创作的连续性。</div>
+        </div>
+      </section>
+
+      <section class="download" id="download" aria-labelledby="download-title">
+        <div class="section-line">
+          <span>下载桌面版</span
+          ><a
+            href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/tag/v0.2.0"
+            >v0.2.0 · 查看发布说明 ↗</a
+          >
+        </div>
+        <div class="download-heading">
+          <h2 id="download-title">开始<br />制作。</h2>
+          <p>放开给大家玩的<br />早期桌面编辑器。</p>
+          <span class="download-arrow" aria-hidden="true">↙</span>
+        </div>
+        <div class="package-list">
+          <div class="package-row">
+            <h3>macOS<span>Apple Silicon</span></h3>
+            <div>
+              <a
+                href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_aarch64.dmg"
+                >DMG <span aria-hidden="true">↓</span></a
+              ><a
+                href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_aarch64.app.tar.gz"
+                >app.tar.gz <span aria-hidden="true">↓</span></a
+              >
+            </div>
+          </div>
+          <div class="package-row">
+            <h3>Windows<span>x64</span></h3>
+            <div>
+              <a
+                href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_x64-setup.exe"
+                >Setup.exe <span aria-hidden="true">↓</span></a
+              ><a
+                href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_x64_en-US.msi"
+                >MSI <span aria-hidden="true">↓</span></a
+              >
+            </div>
+          </div>
+          <div class="package-row">
+            <h3>Linux<span>x86_64</span></h3>
+            <div>
+              <a
+                href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_amd64.AppImage"
+                >AppImage <span aria-hidden="true">↓</span></a
+              ><a
+                href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic_0.2.0_amd64.deb"
+                >deb <span aria-hidden="true">↓</span></a
+              ><a
+                href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases/download/v0.2.0/Ollaic-0.2.0-1.x86_64.rpm"
+                >rpm <span aria-hidden="true">↓</span></a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="download-notes">
+          <p>
+            macOS 安装包未签名，可能被 Gatekeeper 或隔离属性拦截。<br />安装前请查看对应版本的发布说明。
+          </p>
+          <p>仓库包含 Android 与 iOS 客户端；<br />本页不提供移动端正式发布包或应用商店入口。</p>
+        </div>
+      </section>
+    </main>
+    <footer id="footer">
+      <a class="footer-wordmark" href="#top">Ollaic<span aria-hidden="true">↑</span></a>
+      <div class="footer-line">
+        <span>Ollaic GaLaGame Maker · 面向 WebGAL 的桌面编辑器</span
+        ><a href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker">GitHub 仓库 ↗</a
+        ><a href="https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker/releases"
+          >发布记录 ↗</a
+        >
+      </div>
+    </footer>
+  </body>
 </html>

@@ -1,11 +1,26 @@
-# Ollaic website infrastructure
+# Ollaic website
 
-Deployment-only placeholder, not the finished product website. Static HTML and CSS require no dependency installation or build step. GitHub Pages publishes `/docs` on `main`.
+Desktop website prototype for Ollaic, deployed to GitHub Pages via `/docs` on `main`.
 
-Edit `docs/index.html` and `docs/style.css` after the DesignBot handoff. Keep relative asset URLs for the repository subpath. Preview locally with `python3 -m http.server --directory docs 8080`.
+Live site: https://monkey-rotten-net-group.github.io/ollaic-website/
 
-Product: https://github.com/Monkey-Rotten-Net-Group/Ollaic_GaLaGame-Maker
+## Architecture
 
-The product is a desktop visual novel editor based on WebGAL. It does not replace WebGAL. No pricing, community maturity, legal terms, custom domain ownership, or license is asserted here. See ASSET-SOURCES.md for provenance and rights limitations.
+Static HTML, CSS, and vanilla JavaScript without runtime frameworks or build dependencies.
+- `docs/index.html`: Interactive desktop prototype baseline (~1440 × 900)
+- `docs/style.css`: Typography, layout, and reduced-motion styling
+- `docs/motion.js`: Runtime-measured native scroll progression and spatial choreography
+- `docs/review.html`: 16-frame desktop review sheet with direct chapter-progress links
+- `docs/frames/`: Desktop keyframe captures and static flow reference
+- `docs/assets/`: Disclosed prototype interface captures and locally bundled web fonts
 
-Before final launch: apply the DesignBot design, collect cleared real product screenshots/recordings, check responsive layout and accessibility, and verify all factual claims and links. This repository intentionally contains no license grant.
+Local preview:
+```sh
+python3 -m http.server --directory docs 8080
+```
+
+## Product positioning and truth
+
+- Ollaic is a desktop visual novel editor based on WebGAL. It does not replace the WebGAL runtime engine.
+- Official releases: only verified v0.2.0 packages are linked.
+- Asset and font provenance: see [ASSET-SOURCES.md](ASSET-SOURCES.md).
