@@ -1,88 +1,108 @@
 (() => {
   const root = document.documentElement;
-  const staticView = new URLSearchParams(location.search).get('view') === 'flow';
-  const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const header = document.querySelector('.site-header');
-  const sections = [...document.querySelectorAll('.scroll-scene')];
+  const parameters = new URLSearchParams(location.search);
+  const staticView = parameters.get('view') === 'flow';
+  const preference = matchMedia('(prefers-reduced-motion: reduce)');
   const select = (selector) => document.querySelector(selector);
+  const hero = select('#hero');
+  const story = select('#journey');
+  const header = select('.site-header');
   const clamp = (value) => Math.min(1, Math.max(0, value));
   const range = (value, start, end) => clamp((value - start) / (end - start));
   const smooth = (value) => value * value * (3 - 2 * value);
-  const nodes = Object.fromEntries(
-    [
-      '.hero-wordmark',
-      '.hero-kicker',
-      '.hero-copy',
-      '.hero-plane',
-      '.hero-overview',
-      '.structure-copy',
-      '.story-map',
-      '.scene-seed',
-      '.structure-bottom',
-      '.path-chosen',
-      '.scene',
-      '.scene-environment',
-      '.inspector-plane',
-      '.scene h2',
-      '.scene-description',
-      '.production-copy',
-      '.production-type',
-      '.flow-plane',
-      '.memory-plane',
-      '.playback-copy',
-      '.playback-plane',
-      '.export-copy',
-      '.export-type',
-      '.export-path path',
-    ].map((selector) => [selector, select(selector)]),
-  );
+  const quartOut = (value) => 1 - (1 - value) ** 4;
+  const cubicInOut = (value) => (value < 0.5 ? 4 * value ** 3 : 1 - (-2 * value + 2) ** 3 / 2);
+  const nodes = new Map();
+  const landmarks = {
+    journey: 0,
+    structure: 0,
+    scenes: 0.29,
+    production: 0.54,
+    playback: 0.72,
+    export: 0.93,
+  };
   let scheduled = false;
-  let geometry = [];
-  const style = (selector, values) => Object.assign(nodes[selector].style, values);
+  let geometry;
+
+  function style(selector, properties) {
+    if (!nodes.has(selector)) nodes.set(selector, select(selector));
+    const node = nodes.get(selector);
+    for (const [property, value] of Object.entries(properties)) {
+      if (node.style[property] !== String(value)) node.style[property] = value;
+    }
+  }
 
   function measure() {
-    geometry = sections.map((section) => ({
-      section,
-      top: section.offsetTop,
-      distance: Math.max(1, section.offsetHeight - innerHeight),
-    }));
+    geometry = {
+      heroTop: hero.offsetTop,
+      heroDistance: Math.max(1, hero.offsetHeight - innerHeight),
+      storyTop: story.offsetTop,
+      storyDistance: Math.max(1, story.offsetHeight - innerHeight),
+    };
     requestRender();
+  }
+
+  function updateHeader(p) {
+    let mode;
+    if (!root.classList.contains('motion')) {
+      const active = [
+        ...document.querySelectorAll('.hero, .story-layer, .download, #linux, footer'),
+      ]
+        .reverse()
+        .find((section) => {
+          const rect = section.getBoundingClientRect();
+          return rect.top <= 40 && rect.bottom > 40;
+        });
+      mode =
+        {
+          hero: 'hero',
+          structure: 'grid',
+          scenes: 'scene',
+          production: 'production',
+          playback: 'preview',
+          download: 'download',
+          linux: 'dark',
+          footer: 'dark',
+        }[active?.id] || 'hero';
+    } else if (scrollY < geometry.storyTop) mode = 'hero';
+    else if (scrollY < story.offsetTop + story.offsetHeight) {
+      mode =
+        p < 0.25
+          ? 'grid'
+          : p < 0.41
+            ? 'scene'
+            : p < 0.7
+              ? 'production'
+              : p < 0.87
+                ? 'preview'
+                : p < 0.945
+                  ? 'export'
+                  : 'release';
+    } else {
+      const linux = select('#linux').getBoundingClientRect();
+      const footer = select('footer').getBoundingClientRect();
+      mode = (linux.top <= 40 && linux.bottom > 40) || footer.top <= 40 ? 'dark' : 'download';
+    }
+    header.dataset.mode = mode;
   }
 
   function render() {
     scheduled = false;
-    const y = window.scrollY;
-    const darkSections = ['scenes', 'production', 'playback'];
-    const active = [...document.querySelectorAll('main > section, .journey, footer')].find(
-      (section) => {
-        const bounds = section.getBoundingClientRect();
-        return bounds.top <= 36 && bounds.bottom > 36;
-      },
-    );
-    header.classList.toggle(
-      'is-dark',
-      darkSections.includes(active?.id) ||
-        active?.tagName === 'FOOTER' ||
-        (active?.id === 'journey' &&
-          y > active.offsetTop + (active.offsetHeight - innerHeight) * 0.65),
-    );
+    const hProgress = clamp((scrollY - geometry.heroTop) / geometry.heroDistance);
+    const p = clamp((scrollY - geometry.storyTop) / geometry.storyDistance);
+    updateHeader(p);
     if (preference.matches || staticView) return;
-    const [hero, journey, production, playback] = geometry.map(({ top, distance }) =>
-      clamp((y - top) / distance),
-    );
-    const structure = range(journey, 0, 0.65);
-    const scene = range(journey, 0.65, 1);
-    style('.scene', { opacity: range(journey, 0.65, 0.72) });
-    const h = smooth(hero);
+
+    const h = smooth(hProgress);
     style('.hero-wordmark', {
       transform: `translate(${-h * 10}vw, ${-h * 20}vh) scale(${1 + h * 0.15})`,
-      opacity: 1 - range(hero, 0.1, 0.65),
+      opacity: 1 - range(hProgress, 0.1, 0.65),
     });
-    style('.hero-kicker', { opacity: 1 - range(hero, 0, 0.3) });
+    style('.hero-kicker', { opacity: 1 - range(hProgress, 0, 0.3) });
     style('.hero-copy', {
       transform: `translateY(${-h * 160}px)`,
-      opacity: 1 - range(hero, 0.05, 0.48),
-      visibility: hero > 0.6 ? 'hidden' : 'visible',
+      opacity: 1 - range(hProgress, 0.05, 0.48),
+      visibility: hProgress > 0.6 ? 'hidden' : 'visible',
     });
     style('.hero-plane', {
       left: `${45 - h * 33}%`,
@@ -91,67 +111,92 @@
       transform: `perspective(1600px) rotateY(${-7 + h * 7}deg) rotateZ(${-7 + h * 7}deg)`,
     });
     style('.hero-overview', {
-      opacity: range(hero, 0.65, 0.95),
+      opacity: range(hProgress, 0.65, 0.95),
       transform: `translateY(${(1 - h) * 30}px)`,
     });
 
-    const expand = smooth(range(structure, 0.63, 1));
-    style('.path-chosen', { strokeDashoffset: 1 - range(structure, 0, 0.6) });
+    const n = range(p, 0, 0.25);
+    const expand = smooth(range(n, 0.63, 1));
+    style('.path-chosen', { strokeDashoffset: 1 - range(n, 0, 0.6) });
     style('.story-map', {
       transform: `translateX(${-expand * 80}px)`,
-      opacity: 1 - range(structure, 0.68, 0.9),
+      opacity: 1 - range(n, 0.68, 0.9),
     });
     style('.structure-copy', {
       transform: `translateX(${-expand * 120}px)`,
-      opacity: 1 - range(structure, 0.65, 0.88),
+      opacity: 1 - range(n, 0.65, 0.88),
     });
-    style('.structure-bottom', { opacity: 1 - range(structure, 0.6, 0.8) });
+    style('.structure-bottom', { opacity: 1 - range(n, 0.6, 0.8) });
     style('.scene-seed', {
-      opacity: range(structure, 0.38, 0.6),
+      opacity: range(n, 0.38, 0.6),
       width: `${12 + expand * 88}%`,
       height: `${19 + expand * 81}%`,
       right: `${4 * (1 - expand)}%`,
       top: `${37 * (1 - expand)}%`,
     });
+
+    const scene = range(p, 0.25, 0.44);
+    style('.scene', { opacity: range(p, 0.25, 0.27) });
     style('.scene-environment', {
-      transform: `scale(${1 + scene * 0.08}) translateX(${-scene * 1.5}%)`,
+      transform: `scale(${1 + scene * 0.06}) translateX(${-scene}%)`,
+      filter: `saturate(${1 - range(p, 0.34, 0.41) * 0.65})`,
     });
     style('.inspector-plane', {
-      transform: `translateY(${(1 - smooth(range(scene, 0, 0.7))) * 130}px) rotate(${5 - scene * 7}deg)`,
+      transform: `translateY(${(1 - quartOut(range(scene, 0, 0.7))) * 130}px) rotate(${5 - scene * 7}deg)`,
     });
-    style('.scene h2', { transform: `translateY(${-scene * 50}px)` });
-    style('.scene-description', { transform: `translateY(${-scene * 20}px)` });
+    style('.scene h2', { transform: `translateY(${-scene * 35}px)` });
 
-    const f = smooth(production);
-    style('.production-type', { transform: `translateX(${-f * 100}px) rotate(${-9 + f * 9}deg)` });
-    style('.production-copy', { transform: `translateY(${-f * 35}px)` });
+    const flood = range(p, 0.36, 0.44);
+    style('.production', {
+      clipPath: `polygon(0 ${100 - flood * 120}%, 100% ${125 - flood * 125}%, 100% 100%, 0 100%)`,
+    });
+    const track = range(p, 0.44, 0.62);
+    const opening = quartOut(range(p, 0.44, 0.5));
+    style('.production-type', {
+      transform: `translateX(${-track * 120}px)`,
+      clipPath: `inset(0 ${100 * (1 - quartOut(range(p, 0.4, 0.46)))}% 0 0)`,
+    });
+    style('.production-copy', { clipPath: `inset(0 0 ${100 * (1 - range(p, 0.4, 0.45))}% 0)` });
     style('.flow-plane', {
-      transform: `translate(${-f * 70}px, ${-f * 45}px) rotate(${5 - f * 6}deg)`,
+      transform: `translateX(${18 - track * 36}vw)`,
+      clipPath: `inset(0 ${100 * (1 - opening)}% 0 0)`,
     });
+    const memory = range(p, 0.48, 0.58);
     style('.memory-plane', {
-      transform: `translate(${f * 55}px, ${-f * 90}px) rotate(${-8 + f * 11}deg)`,
+      transform: `perspective(1000px) translateY(${-38 * (1 - memory)}vh) rotateY(${-20 + memory * 25}deg) rotateZ(${-6 + memory * 10}deg)`,
+      clipPath: `inset(${100 * (1 - quartOut(range(p, 0.48, 0.54)))}% 0 0 0)`,
     });
 
-    const e = smooth(range(playback, 0.15, 0.85));
-    style('.playback-copy', {
-      transform: `translateY(${-e * 100}px)`,
-      opacity: 1 - range(playback, 0.12, 0.45),
-    });
+    const aperture = cubicInOut(range(p, 0.62, 0.7));
+    style('.playback', { clipPath: `inset(${50 * (1 - aperture)}% 0 ${50 * (1 - aperture)}% 0)` });
+    const split = range(p, 0.72, 0.81) ** 2;
+    style('.playback-heading span:first-child', { transform: `translateX(${-split * 45}vw)` });
+    style('.playback-heading span:last-child', { transform: `translateX(${split * 45}vw)` });
+    style('.playback-copy', { clipPath: `inset(0 0 ${range(p, 0.81, 0.85) * 100}% 0)` });
+    const contract = cubicInOut(range(p, 0.81, 0.93));
     style('.playback-plane', {
-      left: `${-4 + e * 8}%`,
-      top: `${24 + e * 7}%`,
-      width: `${67 - e * 37}%`,
-      transform: `perspective(1600px) rotateY(${8 - e * 8}deg) rotateZ(${-3 + e * 3}deg)`,
+      left: `${contract * 4}%`,
+      top: `${20 + contract * 11}%`,
+      width: `${100 - contract * 70}%`,
     });
-    style('.export-path path', { strokeDashoffset: 1 - range(playback, 0.4, 0.82) });
-    style('.export-copy', {
-      opacity: range(playback, 0.45, 0.72),
-      transform: `translateY(${(1 - e) * 50}px)`,
+    style('.preview-crop', { height: `${65 - contract * 32}vh` });
+    const pan = range(p, 0.72, 0.81);
+    style('.preview-crop img', {
+      width: `${147.7 - contract * 47.7}%`,
+      transform: `translate(${-5.55 * (1 - contract)}%, ${-(9.11 + pan * 39.78) * (1 - contract)}%)`,
     });
+    style('.export-path path', { strokeDashoffset: 1 - range(p, 0.86, 0.92) });
+    style('.export-copy', { clipPath: `inset(0 ${100 * (1 - range(p, 0.89, 0.92))}% 0 0)` });
     style('.export-type', {
-      opacity: range(playback, 0.65, 0.95),
-      transform: `translateY(${(1 - e) * 100}px)`,
+      clipPath: `inset(${100 * (1 - quartOut(range(p, 0.89, 0.93)))}% 0 0 0)`,
     });
+
+    const release = range(p, 0.945, 1);
+    const edge = 120 - release * 140;
+    style('.release-curtain', {
+      clipPath: `polygon(${edge + 20}% 0, 100% 0, 100% 100%, ${edge - 20}% 100%)`,
+    });
+    style('.release-curtain b', { transform: `translateX(${(1 - release) * 14}vw)` });
   }
 
   function requestRender() {
@@ -163,29 +208,49 @@
 
   function configure() {
     root.classList.toggle('motion', !preference.matches && !staticView);
-    if (preference.matches || staticView)
-      Object.values(nodes).forEach((node) => node.removeAttribute('style'));
+    if (preference.matches || staticView) nodes.forEach((node) => node.removeAttribute('style'));
     measure();
   }
+
+  function navigate(id, progress, instant = false) {
+    const node = document.getElementById(id);
+    if (!node && !(id in landmarks)) return;
+    const offset = Number(parameters.get('offset')) || 0;
+    const top =
+      id === 'hero'
+        ? geometry.heroTop + geometry.heroDistance * (progress || 0)
+        : id in landmarks
+          ? geometry.storyTop + geometry.storyDistance * (progress ?? landmarks[id])
+          : node.getBoundingClientRect().top + scrollY + offset;
+    scrollTo({ top, behavior: instant || preference.matches ? 'instant' : 'smooth' });
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const id = link.getAttribute('href').slice(1);
+      if (!root.classList.contains('motion') || !(id in landmarks)) return;
+      event.preventDefault();
+      history.pushState(null, '', `#${id}`);
+      navigate(id);
+    });
+  });
+  addEventListener('popstate', () => {
+    if (root.classList.contains('motion') && location.hash.slice(1) in landmarks)
+      navigate(location.hash.slice(1));
+  });
   addEventListener('scroll', requestRender, { passive: true });
   addEventListener('resize', measure);
   preference.addEventListener('change', configure);
+  configure();
   document.fonts.ready.then(() => {
     measure();
-    const parameters = new URLSearchParams(location.search);
-    const chapter = [...sections, select('#download'), select('footer')].find(
-      (section) => section.id === parameters.get('chapter'),
-    );
-    if (chapter && !preference.matches && !staticView) {
-      const progress = clamp(Number(parameters.get('progress')) || 0);
-      scrollTo({
-        top:
-          chapter.offsetTop +
-          Math.max(0, chapter.offsetHeight - innerHeight) * progress +
-          (Number(parameters.get('offset')) || 0),
-        behavior: 'instant',
-      });
-    }
+    if (!root.classList.contains('motion')) return;
+    const id = parameters.get('chapter') || location.hash.slice(1);
+    if (id)
+      navigate(
+        id,
+        parameters.has('progress') ? clamp(Number(parameters.get('progress')) || 0) : undefined,
+        true,
+      );
   });
-  configure();
 })();
