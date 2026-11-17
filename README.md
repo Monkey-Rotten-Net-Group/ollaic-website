@@ -1,6 +1,6 @@
 # Ollaic website infrastructure
 
-Deployment-only placeholder, not the finished product website. Static HTML and CSS require no dependency installation or build step. GitHub Pages publishes `/site` on `main` (via the root `docs` directory).
+Deployment-only placeholder, not the finished product website. Static HTML and CSS require no dependency installation or build step. GitHub Pages publishes `/docs` on `main`.
 
 Edit `docs/index.html` and `docs/style.css` after the DesignBot handoff. Keep relative asset URLs for the repository subpath. Preview locally with `python3 -m http.server --directory docs 8080`.
 
