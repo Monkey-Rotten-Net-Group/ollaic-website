@@ -13,3 +13,14 @@ main {
 a {
   color: #174ea6;
 }
+figure {
+  margin: 2rem 0;
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+figcaption {
+  margin-top: 0.5rem;
+}
