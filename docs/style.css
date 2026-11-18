@@ -1062,3 +1062,32 @@ html:not(.motion) .export-type {
 .site-header[data-mode='download'] {
   background: var(--lavender);
 }
+
+/* The head supplies the first-paint gate; these rules supply the handoff. */
+.opening-loader::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.052;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23000' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+}
+.opening-wordmark {
+  position: relative;
+  z-index: 1;
+  font: 600 64px/1 Fredoka, sans-serif;
+  transform: translateY(-12px);
+  opacity: 0;
+}
+.opening-loader.is-typed .opening-wordmark {
+  animation: opening-breathe 2400ms ease-in-out infinite;
+}
+@keyframes opening-breathe { 0%, 100% { opacity: .72; } 50% { opacity: 1; } }
+html.is-loading .hero-wordmark, html.is-loading .hero-plane { animation-play-state: paused; }
+html.opening-exit .opening-loader { display: grid; position: fixed; inset: 0; z-index: 10000; place-items: center; background: #dfd5ee; color: #241b30; pointer-events: none; animation: opening-exit 1100ms cubic-bezier(.22,1,.36,1) both; }
+html.opening-exit .opening-wordmark { animation: opening-word-exit 760ms cubic-bezier(.22,1,.36,1) both; }
+@keyframes opening-exit { from { clip-path: inset(0); } to { clip-path: inset(0 0 100%); } }
+@keyframes opening-word-exit { from { opacity: 1; transform: translateY(-12px); } to { opacity: 0; transform: translateY(-28px); } }
+html.opening-short .opening-loader { animation: opening-fade 150ms linear both; }
+@keyframes opening-fade { to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .opening-wordmark { animation: none; } .opening-loader.is-typed .opening-wordmark { opacity: 1; animation: none; } html.opening-exit .opening-wordmark { animation: none; } }

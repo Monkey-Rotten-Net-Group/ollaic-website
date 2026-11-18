@@ -1,5 +1,33 @@
 (() => {
   const root = document.documentElement;
+  if (!root.classList.contains('is-loading')) return;
+  const loader = document.querySelector('.opening-loader');
+  const background = [...document.body.children].filter((node) => node !== loader && node.tagName !== 'SCRIPT');
+  background.forEach((node) => { node.inert = true; });
+  let left = false;
+  window.leaveOpening = () => {
+    if (left) return;
+    left = true;
+    clearTimeout(window.openingFallback);
+    const short = matchMedia('(prefers-reduced-motion: reduce)').matches || new URLSearchParams(location.search).get('view') === 'flow';
+    root.classList.toggle('opening-short', short);
+    root.classList.add('opening-exit');
+    root.classList.remove('is-loading');
+    root.removeAttribute('aria-busy');
+    loader.setAttribute('aria-hidden', 'true');
+    background.forEach((node) => { node.inert = false; });
+    setTimeout(() => { root.classList.remove('opening-exit', 'opening-short'); loader.hidden = true; }, short ? 150 : 1100);
+  };
+  document.fonts.load('600 64px Fredoka').then(() => loader.classList.add('is-typed'));
+  const image = document.querySelector('img[src="assets/stage-study.png"]');
+  const fonts = Promise.all([document.fonts.load('600 64px Fredoka'), document.fonts.load('400 16px "Noto Sans SC"'), document.fonts.load('700 16px "Noto Sans SC"')]).then(() => document.fonts.ready);
+  const ready = Promise.all([fonts, image.decode(), new Promise((resolve) => setTimeout(resolve, Math.max(0, 1100 - (performance.now() - window.openingStarted))))]);
+  ready.then(window.leaveOpening).catch(() => {});
+  if (performance.now() - window.openingStarted >= 5000) window.leaveOpening();
+})();
+
+(() => {
+  const root = document.documentElement;
   const parameters = new URLSearchParams(location.search);
   const staticView = parameters.get('view') === 'flow';
   const preference = matchMedia('(prefers-reduced-motion: reduce)');

@@ -1,6 +1,26 @@
 <!doctype html>
 <html lang="zh-CN">
   <head>
+    <script>
+      if (new URLSearchParams(location.search).get('noloader') !== '1') {
+        document.documentElement.classList.add('is-loading');
+        document.documentElement.setAttribute('aria-busy', 'true');
+        window.openingStarted = performance.now();
+        window.openingFallback = setTimeout(() => {
+          if (window.leaveOpening) window.leaveOpening();
+          else {
+            document.documentElement.classList.remove('is-loading');
+            document.documentElement.removeAttribute('aria-busy');
+          }
+        }, 5000);
+      }
+    </script>
+    <style>
+      .opening-loader { display: none; }
+      html.is-loading { overflow: hidden; }
+      html.is-loading body > :not(.opening-loader) { visibility: hidden; }
+      html.is-loading .opening-loader { display: grid; position: fixed; inset: 0; z-index: 10000; place-items: center; background: #dfd5ee; color: #241b30; }
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#dfd5ee" />
@@ -14,6 +34,9 @@
     <script src="motion.js" defer></script>
   </head>
   <body>
+    <div class="opening-loader" role="status" aria-label="正在准备" tabindex="-1">
+      <span class="opening-wordmark" aria-hidden="true">Ollaic</span>
+    </div>
     <a class="skip" href="#download">跳到下载</a>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="Ollaic 首页">Ollaic</a>
